@@ -22,7 +22,7 @@ if ($akses != 'dokter') {
 <?php
 $title = 'Poliklinik | Jadwal Periksa';
 // Breadcrumb section
-ob_start();?>
+ob_start(); ?>
 <ol class="breadcrumb float-sm-right">
   <li class="breadcrumb-item"><a href="<?= $base_dokter; ?>">Home</a></li>
   <li class="breadcrumb-item active">Jadwal Periksa</li>
@@ -32,7 +32,7 @@ $breadcrumb = ob_get_clean();
 ob_flush();
 
 // Title Section
-ob_start();?>
+ob_start(); ?>
 Jadwal Periksa
 <?php
 $main_title = ob_get_clean();
@@ -61,7 +61,6 @@ ob_start();
           <th>Hari</th>
           <th>Jam Mulai</th>
           <th>Jam Selesai</th>
-          <th>Status</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -73,27 +72,26 @@ ob_start();
                                 p.id as id,
                                 p.hari as hari,
                                 p.jam_mulai as jam_mulai,
-                                p.jam_selesai as jam_selesai,
-                                p.aktif as aktif
+                                p.jam_selesai as jam_selesai
                                 FROM jadwal_periksa p INNER JOIN dokter d ON p.id_dokter = d.id
                                 WHERE d.id = '$id'");
         $data->execute();
         if ($data->rowCount() == 0) {
           echo "<tr><td colspan='7' align='center'>Tidak ada data</td></tr>";
         } else {
-          while($d = $data->fetch()) {
+          while ($d = $data->fetch()) {
         ?>
-        <tr>
-          <td><?= $no++; ?></td>
-          <td><?= $d['nama_dokter'] ?></td>
-          <td><?= $d['hari'] ?></td>
-          <td><?= $d['jam_mulai'] ?></td>
-          <td><?= $d['jam_selesai'] ?></td>
-          <td><?= $d['aktif'] == 'Y' ? 'Aktif' : 'Tidak Aktif' ?></td>
-          <td>
-            <a href="edit.php/<?= $d['id']?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
-          </td>
-        </tr>
+            <tr>
+              <td><?= $no++; ?></td>
+              <td><?= $d['nama_dokter'] ?></td>
+              <td><?= $d['hari'] ?></td>
+              <td><?= $d['jam_mulai'] ?></td>
+              <td><?= $d['jam_selesai'] ?></td>
+              <td>
+                <a href="edit.php/<?= $d['id'] ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                <a href="delete.php/<?= $d['id'] ?>" class="btn btn-danger btn-sm"><i class="fa fa-edit"></i> Delete</a>
+              </td>
+            </tr>
         <?php
           }
         }
@@ -107,7 +105,7 @@ $content = ob_get_clean();
 ob_flush();
 
 // JS Section
-ob_start();?>
+ob_start(); ?>
 <script>
   $(document).ready(function() {
     $('.delete-button').on('click', function(e) {

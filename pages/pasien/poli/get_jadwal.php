@@ -21,10 +21,9 @@ $dataJadwal->execute();
 
 // Bangun opsi-opsi jadwal dokter
 if ($dataJadwal->rowCount() == 0) {
-    echo '<option>Tidak ada jadwal</option>';
+  echo '<option>Tidak ada jadwal</option>';
 } else {
   while ($jd = $dataJadwal->fetch()) {
-    echo '<option value="' . $jd['id_jp'] . '"> Dokter ' . $jd['nama_dokter'] . ' | ' . $jd['hari'] . ' | ' . $jd['jam_mulai'] . ' - ' . $jd['jam_selesai'] .'</option>';
+    echo '<option value="' . $jd['id_jp'] . '"> Dokter ' . $jd['nama_dokter'] . ' | ' . $jd['hari'] . ' | ' . $jd['jam_mulai'] . ' - ' . $jd['jam_selesai'] . '</option>';
   }
 }
-?>
